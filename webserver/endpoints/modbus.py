@@ -1,5 +1,6 @@
-from flask import Blueprint, send_file
+from flask import Blueprint, send_file, redirect
 from flask_login import login_required
+from database.modbus import genCfg
 import serial.tools.list_ports
 import platform
 import json
@@ -17,6 +18,13 @@ def modbus():
 @login_required
 def addDevice():
     return send_file("static/html/modbus/addDevice/addModbusDevice.html")
+
+
+@blueprint.route("/genCfg", methods=["GET", "POST"])
+# @login_required
+def generateCfg():
+    genCfg()
+    return redirect("/dashboard")
 
 
 @blueprint.route("/editDevice", methods=["GET", "POST"])
