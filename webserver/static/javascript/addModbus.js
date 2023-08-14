@@ -191,7 +191,7 @@ async function setupPageContent(value) {
     turnElementOn(devid);
     turnElementOn(devbaud);
     turnElementOn(devparity);
-    devparity.value = "None";
+    devparity.value = parityTypes[0].value;
     turnElementOn(devdata);
     turnElementOn(devstop);
     turnElementOn(devpause);
@@ -206,80 +206,60 @@ async function setupPageContent(value) {
     turnElementOn(aorsize);
     turnElementOn(aowstart);
     turnElementOn(aowsize);
-  } else if (dropmenu.options[dropmenu.selectedIndex].value == "Uno") {
-    tcpdiv.style.display = "none";
-    rtudiv.style.display = "block";
+  } else {
+    var item = await getDevice(value);
 
-    turnElementOff(devid);
-    devid.value = "0";
-    turnElementOff(devbaud);
-    devbaud.value = "115200";
-    turnElementOff(devparity);
-    devparity.value = "None";
-    turnElementOff(devdata);
-    devdata.value = "8";
-    turnElementOff(devstop);
-    devstop.value = "1";
-    turnElementOff(devpause);
-    devpause.value = "0";
+    if (!item) {
+      popError("Could not find device information");
+    }
+
+    if (item.type == "tcp") {
+      tcpdiv.style.display = "block";
+      rtudiv.style.display = "none";
+
+      turnElementOff(devport);
+      devport.value = item.ipPort;
+      turnElementOff(devid);
+      devid.value = item.slaveId;
+    } else if (item.type == "rtu") {
+      tcpdiv.style.display = "none";
+      rtudiv.style.display = "block";
+
+      turnElementOff(devid);
+      devid.value = item.slaveId;
+      turnElementOff(devbaud);
+      devbaud.value = item.baudRate;
+      turnElementOff(devparity);
+      devparity.value = getParityValue(item.parity);
+      turnElementOff(devdata);
+      devdata.value = item.dataBits;
+      turnElementOff(devstop);
+      devstop.value = item.stopBits;
+      turnElementOff(devpause);
+      devpause.value = item.transmissionPause;
+    }
+
     turnElementOff(distart);
-    distart.value = "0";
+    distart.value = item.discreteInputs.startAddress;
     turnElementOff(disize);
-    disize.value = "5";
+    disize.value = item.discreteInputs.size;
     turnElementOff(dostart);
-    dostart.value = "0";
+    dostart.value = item.coils.startAddress;
     turnElementOff(dosize);
-    dosize.value = "4";
+    dosize.value = item.coils.size;
     turnElementOff(aistart);
-    aistart.value = "0";
+    aistart.value = item.inputRegisters.startAddress;
     turnElementOff(aisize);
-    aisize.value = "6";
+    aisize.value = item.inputRegisters.size;
     turnElementOff(aorstart);
-    aorstart.value = "0";
+    aorstart.value = item.holdingRegistersRead.startAddress;
     turnElementOff(aorsize);
-    aorsize.value = "0";
+    aorsize.value = item.holdingRegistersRead.size;
     turnElementOff(aowstart);
-    aowstart.value = "0";
+    aowstart.value = item.holdingRegistersWrite.startAddress;
     turnElementOff(aowsize);
-    aowsize.value = "3";
-  } else if (dropmenu.options[dropmenu.selectedIndex].value == "Mega") {
-    tcpdiv.style.display = "none";
-    rtudiv.style.display = "block";
-
-    turnElementOff(devid);
-    devid.value = item.slaveId;
-    turnElementOff(devbaud);
-    devbaud.value = item.baudRate;
-    turnElementOff(devparity);
-    devparity.value = getParityValue(item.parity);
-    turnElementOff(devdata);
-    devdata.value = item.dataBits;
-    turnElementOff(devstop);
-    devstop.value = item.stopBits;
-    turnElementOff(devpause);
-    devpause.value = item.transmissionPause;
+    aowsize.value = item.holdingRegistersWrite.size;
   }
-
-  turnElementOff(distart);
-  distart.value = item.discreteInputs.startAddress;
-  turnElementOff(disize);
-  disize.value = item.discreteInputs.size;
-  turnElementOff(dostart);
-  dostart.value = item.coils.startAddress;
-  turnElementOff(dosize);
-  dosize.value = item.coils.size;
-  turnElementOff(aistart);
-  aistart.value = item.inputRegisters.startAddress;
-  turnElementOff(aisize);
-  aisize.value = item.inputRegisters.size;
-  turnElementOff(aorstart);
-  aorstart.value = item.holdingRegistersRead.startAddress;
-  turnElementOff(aorsize);
-  aorsize.value = item.holdingRegistersRead.size;
-  turnElementOff(aowstart);
-  aowstart.value = item.holdingRegistersWrite.startAddress;
-  turnElementOff(aowsize);
-  aowsize.value = item.holdingRegistersWrite.size;
 }
 
 function validateForm() {

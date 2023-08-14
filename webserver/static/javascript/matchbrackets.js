@@ -32,7 +32,7 @@
     var afterCursor = config && config.afterCursor;
     if (afterCursor == null)
       afterCursor = /(^| )cm-fat-cursor($| )/.test(
-        cm.getWrapperElement().className
+        cm.getWrapperElement().className,
       );
 
     // A cursor is defined as between two characters, but in in vim command mode
@@ -52,7 +52,7 @@
       Pos(where.line, pos + (dir > 0 ? 1 : 0)),
       dir,
       style || null,
-      config
+      config,
     );
     if (found == null) return null;
     return {
@@ -121,13 +121,13 @@
         marks.push(
           cm.markText(match.from, Pos(match.from.line, match.from.ch + 1), {
             className: style,
-          })
+          }),
         );
         if (match.to && cm.getLine(match.to.line).length <= maxHighlightLen)
           marks.push(
             cm.markText(match.to, Pos(match.to.line, match.to.ch + 1), {
               className: style,
-            })
+            }),
           );
       }
     }
@@ -156,7 +156,7 @@
       cm.state.matchBrackets.currentlyHighlighted = matchBrackets(
         cm,
         false,
-        cm.state.matchBrackets
+        cm.state.matchBrackets,
       );
     });
   }
@@ -194,12 +194,12 @@
         }
       }
       return findMatchingBracket(this, pos, config);
-    }
+    },
   );
   CodeMirror.defineExtension(
     "scanForBracket",
     function (pos, dir, style, config) {
       return scanForBracket(this, pos, dir, style, config);
-    }
+    },
   );
 });

@@ -238,7 +238,7 @@
       if (isTS) {
         // Try to skip TypeScript return type declarations after the arguments
         var m = /:\s*(?:\w+(?:<[^>]*>|\[\])?|\{[^}]*\})\s*$/.exec(
-          stream.string.slice(stream.start, arrow)
+          stream.string.slice(stream.start, arrow),
         );
         if (m) arrow = m.index;
       }
@@ -407,7 +407,7 @@
       cx.state.context = new Context(
         cx.state.context,
         cx.state.localVars,
-        false
+        false,
       );
       cx.state.localVars = defaultVars;
     }
@@ -415,7 +415,7 @@
       cx.state.context = new Context(
         cx.state.context,
         cx.state.localVars,
-        true
+        true,
       );
       cx.state.localVars = null;
     }
@@ -442,7 +442,7 @@
           type,
           null,
           state.lexical,
-          info
+          info,
         );
       };
       result.lex = true;
@@ -516,7 +516,7 @@
               pushlex("}"),
               block,
               poplex,
-              poplex
+              poplex,
             );
         } else if (isTS && value == "namespace") {
           cx.marked = "keyword";
@@ -538,7 +538,7 @@
           block,
           poplex,
           poplex,
-          popcontext
+          popcontext,
         );
       if (type == "case") return cont(expression, expect(":"));
       if (type == "default") return cont(expect(":"));
@@ -549,7 +549,7 @@
           maybeCatchBinding,
           statement,
           poplex,
-          popcontext
+          popcontext,
         );
       if (type == "export") return cont(pushlex("stat"), afterExport, poplex);
       if (type == "import") return cont(pushlex("stat"), afterImport, poplex);
@@ -581,7 +581,7 @@
             poplex,
             expect("=>"),
             body,
-            popcontext
+            popcontext,
           );
         else if (type == "variable")
           return pass(pushcontext, pattern, expect("=>"), body, popcontext);
@@ -602,7 +602,7 @@
           maybeexpression,
           expect(")"),
           poplex,
-          maybeop
+          maybeop,
         );
       if (type == "operator" || type == "spread")
         return cont(noComma ? expressionNoComma : expression);
@@ -629,7 +629,7 @@
         return cont(
           pushcontext,
           noComma ? arrowBodyNoComma : arrowBody,
-          popcontext
+          popcontext,
         );
       if (type == "operator") {
         if (/\+\+|--/.test(value) || (isTS && value == "!")) return cont(me);
@@ -686,7 +686,7 @@
         else if (type == "variable" && isTS)
           return cont(
             maybeTypeArgs,
-            noComma ? maybeoperatorNoComma : maybeoperatorComma
+            noComma ? maybeoperatorNoComma : maybeoperatorComma,
           );
         else return pass(noComma ? expressionNoComma : expression);
       };
@@ -817,14 +817,14 @@
           pushlex("]"),
           commasep(typeexpr, "]", ","),
           poplex,
-          afterType
+          afterType,
         );
       if (type == "{")
         return cont(
           pushlex("}"),
           commasep(typeprop, "}", ",;"),
           poplex,
-          afterType
+          afterType,
         );
       if (type == "(") return cont(commasep(typearg, ")"), maybeReturnType);
       if (type == "<") return cont(commasep(typeexpr, ">"), typeexpr);
@@ -958,14 +958,14 @@
           poplex,
           mayberettype,
           statement,
-          popcontext
+          popcontext,
         );
       if (isTS && value == "<")
         return cont(
           pushlex(">"),
           commasep(typeparam, ">"),
           poplex,
-          functiondef
+          functiondef,
         );
     }
     function funarg(type, value) {
@@ -994,7 +994,7 @@
           pushlex(">"),
           commasep(typeparam, ">"),
           poplex,
-          classNameAfter
+          classNameAfter,
         );
       if (
         value == "extends" ||
@@ -1029,7 +1029,7 @@
           maybetype,
           expect("]"),
           isTS ? classfield : functiondef,
-          classBody
+          classBody,
         );
       if (value == "*") {
         cx.marked = "keyword";
@@ -1103,7 +1103,7 @@
         pushlex("}"),
         commasep(enummember, "}"),
         poplex,
-        poplex
+        poplex,
       );
     }
     function enummember() {
@@ -1123,7 +1123,7 @@
       return (
         (state.tokenize == tokenBase &&
           /^(?:operator|sof|keyword [bcd]|case|new|export|default|spread|[\[{}\(,;:]|=>)$/.test(
-            state.lastType
+            state.lastType,
           )) ||
         (state.lastType == "quasi" &&
           /\{\s*$/.test(stream.string.slice(0, stream.pos - (backUp || 0))))
@@ -1142,7 +1142,7 @@
             (basecolumn || 0) - indentUnit,
             0,
             "block",
-            false
+            false,
           ),
           localVars: parserConfig.localVars,
           context: parserConfig.localVars && new Context(null, null, false),
