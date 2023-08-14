@@ -34,8 +34,17 @@ def editDevice():
 
 
 @blueprint.route("/modbus/deviceTypes", methods=["GET", "POST"])
+@blueprint.route("/modbus/deviceTypes/<value>", methods=["GET", "POST"])
 @login_required
-def deviceTypes():
+def deviceTypes(value=None):
+    if value:
+        with open("static/json/deviceTypes.json") as file:
+            content = json.loads(file.read())
+            try:
+                device = list(filter(lambda x: x["value"] == value, content))[0]
+                return json.dumps(device)
+            except:
+                return ("Device not found", 404)
     return send_file("static/json/deviceTypes.json")
 
 

@@ -1,44 +1,152 @@
 [
   {
     "id": 1,
-    "value": "arduino_uno",
-    "label": "Arduino Uno",
-    "type": "rtu",
-    "isSelected": false
-  },
-  {
-    "id": 2,
-    "value": "arduino_mega",
-    "label": "Arduino Mega",
-    "type": "rtu",
-    "isSelected": false
-  },
-  {
-    "id": 3,
-    "value": "esp32",
-    "label": "ESP32",
-    "type": "tcp",
-    "isSelected": false
-  },
-  {
-    "id": 4,
-    "value": "esp8266",
-    "label": "ESP8266",
-    "type": "tcp",
-    "isSelected": false
-  },
-  {
-    "id": 5,
     "value": "generic_tcp",
     "label": "Generic Modbus TCP Device",
     "type": "tcp",
     "isSelected": false
   },
   {
-    "id": 6,
+    "id": 2,
     "value": "generic_rtu",
     "label": "Generic Modbus RTU Device",
     "type": "rtu",
     "isSelected": false
+  },
+  {
+    "id": 3,
+    "value": "arduino_uno",
+    "label": "Arduino Uno",
+    "type": "rtu",
+    "isSelected": false,
+    "slaveId": 0,
+    "baudRate": 115200,
+    "parity": 1,
+    "dataBits": 8,
+    "stopBits": 1,
+    "transmissionPause": 0,
+    "ipPort": null,
+    "discreteInputs": {
+      "startAddress": 0,
+      "size": 5
+    },
+    "coils": {
+      "startAddress": 0,
+      "size": 4
+    },
+    "inputRegisters": {
+      "startAddress": 0,
+      "size": 6
+    },
+    "holdingRegistersRead": {
+      "startAddress": 0,
+      "size": 0
+    },
+    "holdingRegistersWrite": {
+      "startAddress": 0,
+      "size": 3
+    }
+  },
+  {
+    "id": 4,
+    "value": "arduino_mega",
+    "label": "Arduino Mega",
+    "type": "rtu",
+    "isSelected": false,
+    "slaveId": 0,
+    "baudRate": 115200,
+    "parity": 1,
+    "dataBits": 8,
+    "stopBits": 1,
+    "transmissionPause": 0,
+    "ipPort": null,
+    "discreteInputs": {
+      "startAddress": 0,
+      "size": 24
+    },
+    "coils": {
+      "startAddress": 0,
+      "size": 16
+    },
+    "inputRegisters": {
+      "startAddress": 0,
+      "size": 16
+    },
+    "holdingRegistersRead": {
+      "startAddress": 0,
+      "size": 0
+    },
+    "holdingRegistersWrite": {
+      "startAddress": 0,
+      "size": 12
+    }
+  },
+  {
+    "id": 5,
+    "value": "esp32",
+    "label": "ESP32",
+    "type": "tcp",
+    "isSelected": true,
+    "slaveId": 0,
+    "baudRate": null,
+    "parity": null,
+    "dataBits": null,
+    "stopBits": null,
+    "transmissionPause": null,
+    "ipPort": 502,
+    "discreteInputs": {
+      "startAddress": 0,
+      "size": 8
+    },
+    "coils": {
+      "startAddress": 0,
+      "size": 8
+    },
+    "inputRegisters": {
+      "startAddress": 0,
+      "size": 1
+    },
+    "holdingRegistersRead": {
+      "startAddress": 0,
+      "size": 0
+    },
+    "holdingRegistersWrite": {
+      "startAddress": 0,
+      "size": 1
+    }
+  },
+  {
+    "id": 6,
+    "value": "esp8266",
+    "label": "ESP8266",
+    "type": "tcp",
+    "isSelected": false,
+    "slaveId": 0,
+    "baudRate": null,
+    "parity": null,
+    "dataBits": null,
+    "stopBits": null,
+    "transmissionPause": null,
+    "ipPort": 502,
+    "discreteInputs": {
+      "startAddress": 0,
+      "size": 8
+    },
+    "coils": {
+      "startAddress": 0,
+      "size": 8
+    },
+    "inputRegisters": {
+      "startAddress": 0,
+      "size": 1
+    },
+    "holdingRegistersRead": {
+      "startAddress": 0,
+      "size": 0
+    },
+    "holdingRegistersWrite": {
+      "startAddress": 0,
+      "size": 1
+    }
   }
 ]
