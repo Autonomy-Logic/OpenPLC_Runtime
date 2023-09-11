@@ -1,33 +1,43 @@
 from utils.mbconfig import generateConfig
+from . import db
+from sqlite3 import connect, Row
+from mirror.modbus import ModbusType, ModbusNullable
+from sql.scripts import insert, select
+from sql.utils import convertData
 
 
-def genCfg():
-    # MOCKED DATA DEVICE
+def addModbus(modbus):
+    database = connect(db)
+    database.row_factory = Row
 
-    mock_polling_period = 5000
-    mock_timeout = 5000
+    convertData(modbus, ModbusType, ModbusNullable)
 
-    mocked_dev = {
-        "device_name": "Device 1",
-        "device_slave_id": 3,
-        "device_protocol": "TCP",
-        "device_address": "192.168.56.7",
-        "device_ip_port": 5321,
-        "device_rtu_baud_rate": 20000,
-        "device_rtu_parity": 1,
-        "device_rtu_data_bits": 20,
-        "device_rtu_stop_bits": 2,
-        "device_rtu_tx_pause": 32,
-        "device_di_start": 52,
-        "device_di_size": 30,
-        "device_coils_start": 10,
-        "device_coils_size": 30,
-        "device_ir_start": 32,
-        "device_ir_size": 50,
-        "device_rrr_start": 111,
-        "device_rrr_size": 11,
-        "device_rr_start": 151,
-        "device_rr_size": 15,
-    }
+    script = insert("Slave_Dev", modbus)
 
-    generateConfig([mocked_dev] * 3, mock_polling_period, mock_timeout)
+    try:
+        c = database.execute(script)
+        d = c.fetchone()
+        k = d.keys()
+        d = dict(zip(k, d))
+        database.commit()
+        return d
+    except:
+        raise Exception("Failed persisting slave device in database")
+
+
+def genCfg(polling_period=5000, timeout=5000):
+    database = connect(db)
+    database.row_factory = Row
+
+    script = select("Slave_dev")
+
+    try:
+        c = database.execute(script)
+        d = c.fetchall()
+        k = d[0].keys()
+        dev_list = list(map(lambda x: dict(zip(k, x)), d))
+        database.commit()
+    except:
+        raise Exception("Failed retrieving modbus to generate CFG")
+
+    generateConfig(dev_list, polling_period, timeout)
