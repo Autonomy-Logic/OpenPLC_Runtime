@@ -1,8 +1,9 @@
 from flask import Blueprint, send_file, request, redirect
 from flask_login import login_required
 from os.path import splitext, join
-from database.user import createUser, User
+from database.user import createUser, User, getUsers, getUserWeb
 from database.login import loginManager
+import json
 
 blueprint = Blueprint("usersApi", __name__)
 
@@ -26,7 +27,13 @@ def users():
 @blueprint.route("/addUser", methods=["GET", "POST"])
 @login_required
 def addUser():
-    return send_file("static/html/users/addUser/addUser.html")
+    return send_file("static/html/users/subpages/addUser.html")
+
+
+@blueprint.route("/editUser", methods=["GET", "POST"])
+@login_required
+def editUser():
+    return send_file("static/html/users/subpages/editUser.html")
 
 
 @blueprint.route("/createUser", methods=["GET", "POST"])
@@ -35,11 +42,11 @@ def createNewUser():
     if request.method == "POST":
         file = None
         user = {}
-        user["name"] = request.form.get("full_name")
-        user["username"] = request.form.get("user_name")
+        user["name"] = request.form.get("name")
+        user["username"] = request.form.get("username")
         # Add hash
-        user["password"] = request.form.get("user_password")
-        user["email"] = request.form.get("user_email")
+        user["password"] = request.form.get("password")
+        user["email"] = request.form.get("email")
         if "file" not in request.files:
             user["profile_picture"] = None
         else:
@@ -58,3 +65,16 @@ def createNewUser():
             file.save(join("static/profilePictures/", user["profile_picture"]))
 
         return redirect("/addUser", 302)
+
+@blueprint.route("/getUsers", methods=["GET"])
+@login_required
+def retrieveUsers():
+    if request.method == "GET":
+        return (json.dumps(getUsers()), 200)
+    
+@blueprint.route("/getUser", methods=["GET"])
+@login_required
+def retrieveUser():
+    if request.method == "GET":
+        username = request.args.get("username")
+        return (json.dumps(getUserWeb(username)), 200) 

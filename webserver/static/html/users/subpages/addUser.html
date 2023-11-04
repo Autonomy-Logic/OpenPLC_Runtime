@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="static/css/main.css" />
     <link rel="stylesheet" href="static/css/users.css" />
     <script src="static/javascript/main.js"></script>
-    <script src="static/javascript/users.js"></script>
   </head>
   <body>
     <div class="top">
@@ -102,21 +101,63 @@
       <div class="mainContainer">
         <div class="w3-container">
           <br />
-          <h2>Users</h2>
+          <h2>Add User</h2>
           <br />
-          <table>
-            <tbody id="userTableBody">
-              <tr class="tableHeader">
-                <th>Full Name</th>
-                <th>Username</th>
-                <th>Email</th>
-              </tr>
-            </tbody>
-          </table>
-          <br />
-          <center>
-            <a href="addUser" class="button addUser"><b>Add new user</b></a>
-          </center>
+          <form
+            id="uploadForm"
+            enctype="multipart/form-data"
+            action="createUser"
+            method="post"
+            onsubmit="return validateForm()"
+          >
+            <label for="fullname"><b>Name</b></label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="John Appleseed"
+            />
+            <label for="username"><b>Username</b></label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="username"
+            />
+            <label for="email"><b>Email</b></label>
+            <input
+              type="text"
+              id="email"
+              name="user_email"
+              placeholder="your@email.com"
+            />
+            <label for="password"><b>Password</b></label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="password"
+            />
+            <label for="uploadForm"><b>Picture</b></label>
+            <br />
+            <br />
+            <input
+              type="file"
+              name="file"
+              id="file"
+              class="inputfile"
+              accept="image/*"
+            />
+            <br />
+            <br />
+            <center>
+              <input
+                type="submit"
+                class="button addUser saveUser"
+                value="Add user"
+              />
+            </center>
+          </form>
         </div>
       </div>
     </div>

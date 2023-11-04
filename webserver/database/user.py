@@ -41,10 +41,44 @@ def getUserInfo(username):
         u = c.fetchone()
         k = u.keys()
         u = dict(zip(k, u))
-        database.commit()
         return u
     except:
         raise Exception("Failed getting user")
+    
+def getUserWeb(username):
+    database = connect(db)
+    database.row_factory = Row
+
+    username = UserType["username"](username, False).data
+
+    script = select("User", {"username": username})
+
+    try:
+        c = database.execute(script)
+        u = c.fetchone()
+        k = u.keys()
+        u = dict(zip(k, u))
+        del(u["salt"])
+        del(u["password"])
+        return u
+    except:
+        raise Exception("Failed getting user")
+    
+def getUsers():
+    database = connect(db)
+    database.row_factory = Row
+
+    script = select("User")
+
+    try:
+        c = database.execute(script)
+        users = c.fetchall()
+        cols = users[0].keys()
+        users = list(map(lambda u: dict(zip(cols, u)), users))
+        return users
+    except:
+        raise Exception("Failed getting users")
+
 
 
 def createUser(user):
