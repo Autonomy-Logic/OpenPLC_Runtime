@@ -117,7 +117,7 @@
   CodeMirror.registerHelper(
     "hintWords",
     "python",
-    commonKeywords.concat(commonBuiltins).concat(["exec", "print"])
+    commonKeywords.concat(commonBuiltins).concat(["exec", "print"]),
   );
 
   function top(state) {
@@ -170,7 +170,7 @@
       myBuiltins = myBuiltins.concat(["ascii", "bytes", "exec", "print"]);
       var stringPrefixes = new RegExp(
         "^(([rbuf]|(br)|(rb)|(fr)|(rf))?('{3}|\"{3}|['\"]))",
-        "i"
+        "i",
       );
     } else {
       var identifiers = parserConf.identifiers || /^[_A-Za-z][_A-Za-z0-9]*/;
@@ -197,7 +197,7 @@
       ]);
       var stringPrefixes = new RegExp(
         "^(([rubf]|(ur)|(br))?('{3}|\"{3}|['\"]))",
-        "i"
+        "i",
       );
     }
     var keywords = wordRegexp(myKeywords);
@@ -287,7 +287,7 @@
         } else {
           state.tokenize = formatStringFactory(
             stream.current(),
-            state.tokenize
+            state.tokenize,
           );
           return state.tokenize(stream, state);
         }
@@ -479,7 +479,7 @@
           pushBracketScope(
             stream,
             state,
-            "])}".slice(delimiter_index, delimiter_index + 1)
+            "])}".slice(delimiter_index, delimiter_index + 1),
           );
 
         delimiter_index = "])}".indexOf(current);
@@ -561,7 +561,7 @@
     extra_keywords: words(
       "by cdef cimport cpdef ctypedef enum except " +
         "extern gil include nogil property public " +
-        "readonly struct union DEF IF ELIF ELSE"
+        "readonly struct union DEF IF ELIF ELSE",
     ),
   });
 });

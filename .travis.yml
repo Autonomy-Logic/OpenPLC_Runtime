@@ -2,7 +2,7 @@ language: bash
 
 services:
   - docker
-  
+
 addons:
   apt:
     packages:
@@ -11,7 +11,7 @@ addons:
 script:
   - docker build .
   - doxygen doxygen.conf
-  
+
     #deploy:
     #  provider: pages
     #  skip_cleanup: true

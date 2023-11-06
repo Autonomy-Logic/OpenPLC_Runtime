@@ -15,3 +15,9 @@ CMakeSettings.json
 webserver/bin
 webserver/build
 obj/
+
+# User Database
+webserver/database/database.sqlite
+
+# User CFG
+webserver/utils/config/mbconfig.cfg

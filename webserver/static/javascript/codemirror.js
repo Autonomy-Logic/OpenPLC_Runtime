@@ -451,7 +451,7 @@
       "div",
       [d.measure, d.lineMeasure, d.selectionDiv, d.cursorDiv, d.lineDiv],
       null,
-      "position: relative; outline: none"
+      "position: relative; outline: none",
     );
     var lines = eltP("div", [d.lineSpace], "CodeMirror-lines");
     // Moved around its parent to cover visible view.
@@ -466,7 +466,7 @@
       "div",
       null,
       null,
-      "position: absolute; height: " + scrollerGap + "px; width: 1px;"
+      "position: absolute; height: " + scrollerGap + "px; width: 1px;",
     );
     // Will contain the gutters, if any.
     d.gutters = elt("div", null, "CodeMirror-gutters");
@@ -475,14 +475,14 @@
     d.scroller = elt(
       "div",
       [d.sizer, d.heightForcer, d.gutters],
-      "CodeMirror-scroll"
+      "CodeMirror-scroll",
     );
     d.scroller.setAttribute("tabIndex", "-1");
     // The element in which the editor lives.
     d.wrapper = elt(
       "div",
       [d.scrollbarFiller, d.gutterFiller, d.scroller],
-      "CodeMirror"
+      "CodeMirror",
     );
 
     // Work around IE7 z-index bug (not perfect, hence IE7 not really being supported)
@@ -555,7 +555,7 @@
     n -= doc.first;
     if (n < 0 || n >= doc.size) {
       throw new Error(
-        "There is no line " + (n + doc.first) + " in the document."
+        "There is no line " + (n + doc.first) + " in the document.",
       );
     }
     var chunk = doc;
@@ -804,7 +804,7 @@
             span.to == null ||
             (marker.inclusiveRight ? span.to >= startCh : span.to > startCh);
           (nw || (nw = [])).push(
-            new MarkedSpan(marker, span.from, endsAfter ? null : span.to)
+            new MarkedSpan(marker, span.from, endsAfter ? null : span.to),
           );
         }
       }
@@ -833,8 +833,8 @@
             new MarkedSpan(
               marker,
               startsBefore ? null : span.from - endCh,
-              span.to == null ? null : span.to - endCh
-            )
+              span.to == null ? null : span.to - endCh,
+            ),
           );
         }
       }
@@ -925,7 +925,7 @@
         for (var i$2 = 0; i$2 < first.length; ++i$2) {
           if (first[i$2].to == null) {
             (gapMarkers || (gapMarkers = [])).push(
-              new MarkedSpan(first[i$2].marker, null, null)
+              new MarkedSpan(first[i$2].marker, null, null),
             );
           }
         }
@@ -1222,7 +1222,7 @@
       return lineIsHiddenInner(
         doc,
         end.line,
-        getMarkedSpanFor(end.line.markedSpans, span.marker)
+        getMarkedSpanFor(end.line.markedSpans, span.marker),
       );
     }
     if (span.marker.inclusiveRight && span.to == line.text.length) {
@@ -1328,7 +1328,7 @@
           Math.max(part.from, from),
           Math.min(part.to, to),
           part.level == 1 ? "rtl" : "ltr",
-          i
+          i,
         );
         found = true;
       }
@@ -1761,7 +1761,7 @@
       var test = elt("span", "\u200b");
       removeChildrenAndAdd(
         measure,
-        elt("span", [test, document.createTextNode("x")])
+        elt("span", [test, document.createTextNode("x")]),
       );
       if (measure.firstChild.offsetHeight != 0) {
         zwspSupported =
@@ -1776,7 +1776,7 @@
           "span",
           "\u00a0",
           null,
-          "display: inline-block; width: 1px; margin-right: -1px"
+          "display: inline-block; width: 1px; margin-right: -1px",
         );
     node.setAttribute("cm-text", "");
     return node;
@@ -1790,7 +1790,7 @@
     }
     var txt = removeChildrenAndAdd(
       measure,
-      document.createTextNode("A\u062eA")
+      document.createTextNode("A\u062eA"),
     );
     var r0 = range(txt, 0, 1).getBoundingClientRect();
     var r1 = range(txt, 1, 2).getBoundingClientRect();
@@ -1816,7 +1816,7 @@
             }
             var line = string.slice(
               pos,
-              string.charAt(nl - 1) == "\r" ? nl - 1 : nl
+              string.charAt(nl - 1) == "\r" ? nl - 1 : nl,
             );
             var rt = line.indexOf("\r");
             if (rt != -1) {
@@ -2078,7 +2078,7 @@
         this.start,
         this.tabSize,
         this.lastColumnPos,
-        this.lastColumnValue
+        this.lastColumnValue,
       );
       this.lastColumnPos = this.start;
     }
@@ -2191,7 +2191,7 @@
         doc,
         copyState(doc.mode, saved.state),
         line,
-        saved.lookAhead
+        saved.lookAhead,
       );
     } else {
       return new Context(doc, copyState(doc.mode, saved), line);
@@ -2225,7 +2225,7 @@
         return st.push(end, style);
       },
       lineClasses,
-      forceToEnd
+      forceToEnd,
     );
     var state = context.state;
 
@@ -2265,7 +2265,7 @@
             }
           }
         },
-        lineClasses
+        lineClasses,
       );
       context.state = state;
       context.baseTokens = null;
@@ -2301,7 +2301,7 @@
       if (updateFrontier === cm.doc.highlightFrontier) {
         cm.doc.modeFrontier = Math.max(
           cm.doc.modeFrontier,
-          ++cm.doc.highlightFrontier
+          ++cm.doc.highlightFrontier,
         );
       }
     }
@@ -2405,7 +2405,7 @@
       style = readToken(mode, stream, context.state);
       if (asArray) {
         tokens.push(
-          new Token(stream, style, copyState(doc.mode, context.state))
+          new Token(stream, style, copyState(doc.mode, context.state)),
         );
       }
     }
@@ -2460,7 +2460,7 @@
       } else {
         style = extractLineClasses(
           readToken(mode, stream, context.state, inner),
-          lineClasses
+          lineClasses,
         );
       }
       if (inner) {
@@ -2614,7 +2614,7 @@
       "span",
       null,
       null,
-      webkit ? "padding-right: .1px" : null
+      webkit ? "padding-right: .1px" : null,
     );
     var builder = {
       pre: eltP("pre", [content], "CodeMirror-line"),
@@ -2647,19 +2647,19 @@
       insertLineContent(
         line,
         builder,
-        getLineStyles(cm, line, allowFrontierUpdate)
+        getLineStyles(cm, line, allowFrontierUpdate),
       );
       if (line.styleClasses) {
         if (line.styleClasses.bgClass) {
           builder.bgClass = joinClasses(
             line.styleClasses.bgClass,
-            builder.bgClass || ""
+            builder.bgClass || "",
           );
         }
         if (line.styleClasses.textClass) {
           builder.textClass = joinClasses(
             line.styleClasses.textClass,
-            builder.textClass || ""
+            builder.textClass || "",
           );
         }
       }
@@ -2669,7 +2669,7 @@
         builder.map.push(
           0,
           0,
-          builder.content.appendChild(zeroWidthElement(cm.display.measure))
+          builder.content.appendChild(zeroWidthElement(cm.display.measure)),
         );
       }
 
@@ -2679,7 +2679,7 @@
         lineView.measure.cache = {};
       } else {
         (lineView.measure.maps || (lineView.measure.maps = [])).push(
-          builder.map
+          builder.map,
         );
         (lineView.measure.caches || (lineView.measure.caches = [])).push({});
       }
@@ -2700,7 +2700,7 @@
     if (builder.pre.className) {
       builder.textClass = joinClasses(
         builder.pre.className,
-        builder.textClass || ""
+        builder.textClass || "",
       );
     }
 
@@ -2743,7 +2743,7 @@
         var skipped = m ? m.index - pos : text.length - pos;
         if (skipped) {
           var txt = document.createTextNode(
-            displayText.slice(pos, pos + skipped)
+            displayText.slice(pos, pos + skipped),
           );
           if (ie && ie_version < 9) {
             content.appendChild(elt("span", [txt]));
@@ -2763,14 +2763,14 @@
           var tabSize = builder.cm.options.tabSize,
             tabWidth = tabSize - (builder.col % tabSize);
           txt$1 = content.appendChild(
-            elt("span", spaceStr(tabWidth), "cm-tab")
+            elt("span", spaceStr(tabWidth), "cm-tab"),
           );
           txt$1.setAttribute("role", "presentation");
           txt$1.setAttribute("cm-text", "\t");
           builder.col += tabWidth;
         } else if (m[0] == "\r" || m[0] == "\n") {
           txt$1 = content.appendChild(
-            elt("span", m[0] == "\r" ? "\u240d" : "\u2424", "cm-invalidchar")
+            elt("span", m[0] == "\r" ? "\u240d" : "\u2424", "cm-invalidchar"),
           );
           txt$1.setAttribute("cm-text", m[0]);
           builder.col += 1;
@@ -2853,7 +2853,7 @@
           startStyle,
           null,
           title,
-          css
+          css,
         );
         startStyle = null;
         text = text.slice(part.to - start);
@@ -2892,7 +2892,7 @@
         builder.addToken(
           builder,
           allText.slice(at, (at = styles[i$1])),
-          interpretTokenStyle(styles[i$1 + 1], builder.cm.options)
+          interpretTokenStyle(styles[i$1 + 1], builder.cm.options),
         );
       }
       return;
@@ -2976,7 +2976,7 @@
             builder,
             (collapsed.to == null ? len + 1 : collapsed.to) - pos,
             collapsed.marker,
-            collapsed.from == null
+            collapsed.from == null,
           );
           if (collapsed.to == null) {
             return;
@@ -3003,7 +3003,7 @@
               spanStartStyle,
               pos + tokenText.length == nextChange ? spanEndStyle : "",
               title,
-              css
+              css,
             );
           }
           if (end >= upto) {
@@ -3074,7 +3074,7 @@
           while (op.cursorActivityCalled < op.cursorActivityHandlers.length) {
             op.cursorActivityHandlers[op.cursorActivityCalled++].call(
               null,
-              op.cm
+              op.cm,
             );
           }
         }
@@ -3190,7 +3190,7 @@
       var wrap = ensureLineWrapped(lineView);
       lineView.background = wrap.insertBefore(
         elt("div", null, cls),
-        wrap.firstChild
+        wrap.firstChild,
       );
       cm.display.input.setUneditable(lineView.background);
     }
@@ -3263,7 +3263,7 @@
           (cm.options.fixedGutter ? dims.fixedPos : -dims.gutterTotalWidth) +
           "px; width: " +
           dims.gutterTotalWidth +
-          "px"
+          "px",
       );
       cm.display.input.setUneditable(lineView.gutterBackground);
       wrap.insertBefore(lineView.gutterBackground, lineView.text);
@@ -3277,7 +3277,7 @@
         "CodeMirror-gutter-wrapper",
         "left: " +
           (cm.options.fixedGutter ? dims.fixedPos : -dims.gutterTotalWidth) +
-          "px"
+          "px",
       ));
       cm.display.input.setUneditable(gutterWrap);
       wrap$1.insertBefore(gutterWrap, lineView.text);
@@ -3297,8 +3297,8 @@
               dims.gutterLeft["CodeMirror-linenumbers"] +
               "px; width: " +
               cm.display.lineNumInnerWidth +
-              "px"
-          )
+              "px",
+          ),
         );
       }
       if (markers) {
@@ -3315,8 +3315,8 @@
                   dims.gutterLeft[id] +
                   "px; width: " +
                   dims.gutterWidth[id] +
-                  "px"
-              )
+                  "px",
+              ),
             );
           }
         }
@@ -3430,7 +3430,7 @@
       }
       removeChildrenAndAdd(
         cm.display.measure,
-        elt("div", [widget.node], null, parentStyle)
+        elt("div", [widget.node], null, parentStyle),
       );
     }
     return (widget.height = widget.node.parentNode.offsetHeight);
@@ -3550,7 +3550,7 @@
     var view = (cm.display.externalMeasured = new LineView(
       cm.doc,
       line,
-      lineN
+      lineN,
     ));
     view.lineN = lineN;
     var built = (view.built = buildLineContent(cm, view));
@@ -3976,7 +3976,7 @@
       cm,
       lineObj,
       measureChar(cm, lineObj, pos.ch, bias),
-      context
+      context,
     );
   }
 
@@ -4007,7 +4007,7 @@
         preparedMeasure,
         ch,
         right ? "right" : "left",
-        varHeight
+        varHeight,
       );
       if (right) {
         m.left = m.right;
@@ -4088,7 +4088,7 @@
         getLine(doc, last).text.length,
         null,
         true,
-        1
+        1,
       );
     }
     if (x < 0) {
@@ -4100,7 +4100,7 @@
       var found = coordsCharInner(cm, lineObj, lineN, x, y);
       var collapsed = collapsedSpanAround(
         lineObj,
-        found.ch + (found.xRel > 0 ? 1 : 0)
+        found.ch + (found.xRel > 0 ? 1 : 0),
       );
       if (!collapsed) {
         return found;
@@ -4121,14 +4121,14 @@
         return measureCharPrepared(cm, preparedMeasure, ch - 1).bottom <= y;
       },
       end,
-      0
+      0,
     );
     end = findFirst(
       function (ch) {
         return measureCharPrepared(cm, preparedMeasure, ch).top > y;
       },
       begin,
-      end
+      end,
     );
     return { begin: begin, end: end };
   }
@@ -4141,7 +4141,7 @@
       cm,
       lineObj,
       measureCharPrepared(cm, preparedMeasure, target),
-      "line"
+      "line",
     ).top;
     return wrappedLineExtent(cm, lineObj, preparedMeasure, targetTop);
   }
@@ -4203,7 +4203,7 @@
         return true;
       },
       begin,
-      end
+      end,
     );
 
     var baseX,
@@ -4244,7 +4244,7 @@
         Pos(lineNo, ch, sticky),
         "line",
         lineObj,
-        preparedMeasure
+        preparedMeasure,
       );
       baseX = coords.left;
       outside = y < coords.top || y >= coords.bottom;
@@ -4269,15 +4269,15 @@
             Pos(lineNo, ltr ? part.to : part.from, ltr ? "before" : "after"),
             "line",
             lineObj,
-            preparedMeasure
+            preparedMeasure,
           ),
           x,
           y,
-          true
+          true,
         );
       },
       0,
-      order.length - 1
+      order.length - 1,
     );
     var part = order[index];
     // If this isn't the first part, the part's start is also after
@@ -4290,7 +4290,7 @@
         Pos(lineNo, ltr ? part.from : part.to, ltr ? "after" : "before"),
         "line",
         lineObj,
-        preparedMeasure
+        preparedMeasure,
       );
       if (boxIsAfter(start, x, y, true) && start.top > y) {
         part = order[index - 1];
@@ -4306,7 +4306,7 @@
     preparedMeasure,
     order,
     x,
-    y
+    y,
   ) {
     // In a wrapped line, rtl text on wrapping boundaries can do things
     // that don't correspond to the ordering in our `order` array at
@@ -4332,7 +4332,7 @@
       var endX = measureCharPrepared(
         cm,
         preparedMeasure,
-        ltr ? Math.min(end, p.to) - 1 : Math.max(begin, p.from)
+        ltr ? Math.min(end, p.to) - 1 : Math.max(begin, p.from),
       ).right;
       // Weigh against spans ending before this, so that they are only
       // picked if nothing ends after
@@ -4505,8 +4505,8 @@
         Math.max(
           0,
           Math.round((x - paddingH(cm.display).left) / charWidth(cm.display)) -
-            colDiff
-        )
+            colDiff,
+        ),
       );
     }
     return coords;
@@ -4573,7 +4573,7 @@
       "div",
       null,
       null,
-      !cm.options.singleCursorHeightPerLine
+      !cm.options.singleCursorHeightPerLine,
     );
 
     var cursor = output.appendChild(elt("div", "\u00a0", "CodeMirror-cursor"));
@@ -4585,7 +4585,7 @@
     if (pos.other) {
       // Secondary cursor, shown when on a 'jump' in bi-directional text
       var otherCursor = output.appendChild(
-        elt("div", "\u00a0", "CodeMirror-cursor CodeMirror-secondarycursor")
+        elt("div", "\u00a0", "CodeMirror-cursor CodeMirror-secondarycursor"),
       );
       otherCursor.style.display = "";
       otherCursor.style.left = pos.other.left + "px";
@@ -4609,7 +4609,7 @@
     var rightSide =
       Math.max(
         display.sizerWidth,
-        displayWidth(cm) - display.sizer.offsetLeft
+        displayWidth(cm) - display.sizer.offsetLeft,
       ) - padding.right;
     var docLTR = doc.direction == "ltr";
 
@@ -4632,8 +4632,8 @@
             (width == null ? rightSide - left : width) +
             "px;\n                             height: " +
             (bottom - top) +
-            "px"
-        )
+            "px",
+        ),
       );
     }
 
@@ -4711,7 +4711,7 @@
           if (cmpCoords(toPos, end) < 0) {
             end = toPos;
           }
-        }
+        },
       );
       return { start: start, end: end };
     }
@@ -4727,12 +4727,12 @@
       var leftEnd = drawForLine(
         sFrom.line,
         sFrom.ch,
-        singleVLine ? fromLine.text.length + 1 : null
+        singleVLine ? fromLine.text.length + 1 : null,
       ).end;
       var rightStart = drawForLine(
         sTo.line,
         singleVLine ? 0 : null,
-        sTo.ch
+        sTo.ch,
       ).start;
       if (singleVLine) {
         if (leftEnd.top < rightStart.top - 2) {
@@ -4743,7 +4743,7 @@
             leftEnd.right,
             leftEnd.top,
             rightStart.left - leftEnd.right,
-            leftEnd.bottom
+            leftEnd.bottom,
           );
         }
       }
@@ -4911,12 +4911,12 @@
         from = ensureFrom;
         to = lineAtHeight(
           doc,
-          heightAtLine(getLine(doc, ensureFrom)) + display.wrapper.clientHeight
+          heightAtLine(getLine(doc, ensureFrom)) + display.wrapper.clientHeight,
         );
       } else if (Math.min(ensureTo, doc.lastLine()) >= to) {
         from = lineAtHeight(
           doc,
-          heightAtLine(getLine(doc, ensureTo)) - display.wrapper.clientHeight
+          heightAtLine(getLine(doc, ensureTo)) - display.wrapper.clientHeight,
         );
         to = ensureTo;
       }
@@ -4979,8 +4979,8 @@
         elt(
           "div",
           [elt("div", last)],
-          "CodeMirror-linenumber CodeMirror-gutter-elt"
-        )
+          "CodeMirror-linenumber CodeMirror-gutter-elt",
+        ),
       );
       var innerW = test.firstChild.offsetWidth,
         padding = test.offsetWidth - innerW;
@@ -5029,7 +5029,7 @@
           rect.left +
           "px; width: " +
           Math.max(2, rect.right - rect.left) +
-          "px;"
+          "px;",
       );
       cm.display.lineSpace.appendChild(scrollNode);
       scrollNode.scrollIntoView(doScroll);
@@ -5124,7 +5124,7 @@
     } else if (rect.bottom > screentop + screen) {
       var newTop = Math.min(
         rect.top,
-        (atBottom ? docBottom : rect.bottom) - screen
+        (atBottom ? docBottom : rect.bottom) - screen,
       );
       if (newTop != screentop) {
         result.scrollTop = newTop;
@@ -5236,7 +5236,7 @@
   function setScrollTop(cm, val, forceScroll) {
     val = Math.min(
       cm.display.scroller.scrollHeight - cm.display.scroller.clientHeight,
-      val
+      val,
     );
     if (cm.display.scroller.scrollTop == val && !forceScroll) {
       return;
@@ -5253,7 +5253,7 @@
   function setScrollLeft(cm, val, isScroller, forceScroll) {
     val = Math.min(
       val,
-      cm.display.scroller.scrollWidth - cm.display.scroller.clientWidth
+      cm.display.scroller.scrollWidth - cm.display.scroller.clientWidth,
     );
     if (
       (isScroller
@@ -5298,12 +5298,12 @@
     var vert = (this.vert = elt(
       "div",
       [elt("div", null, null, "min-width: 1px")],
-      "CodeMirror-vscrollbar"
+      "CodeMirror-vscrollbar",
     ));
     var horiz = (this.horiz = elt(
       "div",
       [elt("div", null, null, "height: 100%; min-height: 1px")],
-      "CodeMirror-hscrollbar"
+      "CodeMirror-hscrollbar",
     ));
     vert.tabIndex = horiz.tabIndex = -1;
     place(vert);
@@ -5410,7 +5410,7 @@
           ? document.elementFromPoint(box.right - 1, (box.top + box.bottom) / 2)
           : document.elementFromPoint(
               (box.right + box.left) / 2,
-              box.bottom - 1
+              box.bottom - 1,
             );
       if (elt != bar) {
         bar.style.pointerEvents = "none";
@@ -5518,7 +5518,7 @@
           updateScrollTop(cm, pos);
         }
       },
-      cm
+      cm,
     );
     if (cm.display.scrollbars.addClass) {
       addClass(cm.display.wrapper, cm.display.scrollbars.addClass);
@@ -5628,7 +5628,7 @@
       new DisplayUpdate(
         cm,
         op.mustUpdate && { top: op.scrollTop, ensure: op.scrollToPos },
-        op.forceUpdate
+        op.forceUpdate,
       );
   }
 
@@ -5658,11 +5658,11 @@
         display.sizer.offsetLeft +
           op.adjustWidthTo +
           scrollGap(cm) +
-          cm.display.barWidth
+          cm.display.barWidth,
       );
       op.maxScrollLeft = Math.max(
         0,
-        display.sizer.offsetLeft + op.adjustWidthTo - displayWidth(cm)
+        display.sizer.offsetLeft + op.adjustWidthTo - displayWidth(cm),
       );
     }
 
@@ -5680,7 +5680,7 @@
         setScrollLeft(
           cm,
           Math.min(cm.display.scroller.scrollLeft, op.maxScrollLeft),
-          true
+          true,
         );
       }
       cm.display.maxLineChanged = false;
@@ -5740,7 +5740,7 @@
         cm,
         clipPos(doc, op.scrollToPos.from),
         clipPos(doc, op.scrollToPos.to),
-        op.scrollToPos.margin
+        op.scrollToPos.margin,
       );
       maybeScrollWindow(cm, rect);
     }
@@ -5999,7 +5999,7 @@
     } else {
       if (display.viewFrom > from) {
         display.view = buildViewArray(cm, from, display.viewFrom).concat(
-          display.view
+          display.view,
         );
       } else if (display.viewFrom < from) {
         display.view = display.view.slice(findViewIndex(cm, from));
@@ -6007,7 +6007,7 @@
       display.viewFrom = from;
       if (display.viewTo < to) {
         display.view = display.view.concat(
-          buildViewArray(cm, display.viewTo, to)
+          buildViewArray(cm, display.viewTo, to),
         );
       } else if (display.viewTo > to) {
         display.view = display.view.slice(0, findViewIndex(cm, to));
@@ -6097,7 +6097,7 @@
           startWorker(cm, cm.options.workDelay);
           return true;
         }
-      }
+      },
     );
     doc.highlightFrontier = context.line;
     doc.modeFrontier = Math.max(doc.modeFrontier, context.line);
@@ -6231,7 +6231,7 @@
     var end = doc.first + doc.size;
     var from = Math.max(
       update.visible.from - cm.options.viewportMargin,
-      doc.first
+      doc.first,
     );
     var to = Math.min(end, update.visible.to + cm.options.viewportMargin);
     if (display.viewFrom < from && from - display.viewFrom < 20) {
@@ -6314,7 +6314,7 @@
           viewport = {
             top: Math.min(
               cm.doc.height + paddingVert(cm.display) - displayHeight(cm),
-              viewport.top
+              viewport.top,
             ),
           };
         }
@@ -6349,7 +6349,7 @@
         "viewportChange",
         cm,
         cm.display.viewFrom,
-        cm.display.viewTo
+        cm.display.viewTo,
       );
       cm.display.reportedViewFrom = cm.display.viewFrom;
       cm.display.reportedViewTo = cm.display.viewTo;
@@ -6420,7 +6420,7 @@
         if (updateNumber) {
           removeChildren(lineView.lineNumber);
           lineView.lineNumber.appendChild(
-            document.createTextNode(lineNumberFor(cm.options, lineN))
+            document.createTextNode(lineNumberFor(cm.options, lineN)),
           );
         }
         cur = lineView.node.nextSibling;
@@ -6454,7 +6454,7 @@
     for (; i < specs.length; ++i) {
       var gutterClass = specs[i];
       var gElt = gutters.appendChild(
-        elt("div", null, "CodeMirror-gutter " + gutterClass)
+        elt("div", null, "CodeMirror-gutter " + gutterClass),
       );
       if (gutterClass == "CodeMirror-linenumbers") {
         cm.display.lineGutter = gElt;
@@ -6556,12 +6556,12 @@
       if (dy && canScrollY) {
         updateScrollTop(
           cm,
-          Math.max(0, scroll.scrollTop + dy * wheelPixelsPerUnit)
+          Math.max(0, scroll.scrollTop + dy * wheelPixelsPerUnit),
         );
       }
       setScrollLeft(
         cm,
-        Math.max(0, scroll.scrollLeft + dx * wheelPixelsPerUnit)
+        Math.max(0, scroll.scrollLeft + dx * wheelPixelsPerUnit),
       );
       // Only prevent default scrolling if vertical scrolling is
       // actually possible. Otherwise, it causes vertical scroll
@@ -6664,7 +6664,7 @@
     for (var i = 0; i < this.ranges.length; i++) {
       out[i] = new Range(
         copyPos(this$1.ranges[i].anchor),
-        copyPos(this$1.ranges[i].head)
+        copyPos(this$1.ranges[i].head),
       );
     }
     return new Selection(out, this.primIndex);
@@ -6750,7 +6750,7 @@
     }
     return Pos(
       change.from.line + change.text.length - 1,
-      lst(change.text).length + (change.text.length == 1 ? change.from.ch : 0)
+      lst(change.text).length + (change.text.length == 1 ? change.from.ch : 0),
     );
   }
 
@@ -6780,8 +6780,8 @@
       out.push(
         new Range(
           adjustForChange(range.anchor, change),
-          adjustForChange(range.head, change)
-        )
+          adjustForChange(range.head, change),
+        ),
       );
     }
     return normalizeSelection(out, doc.sel.primIndex);
@@ -6904,7 +6904,7 @@
           firstLine.text.slice(0, from.ch) +
             lastText +
             firstLine.text.slice(to.ch),
-          lastSpans
+          lastSpans,
         );
       } else {
         var added$1 = linesFor(1, text.length - 1);
@@ -6912,13 +6912,13 @@
           new Line(
             lastText + firstLine.text.slice(to.ch),
             lastSpans,
-            estimateHeight
-          )
+            estimateHeight,
+          ),
         );
         update(
           firstLine,
           firstLine.text.slice(0, from.ch) + text[0],
-          spansFor(0)
+          spansFor(0),
         );
         doc.insert(from.line + 1, added$1);
       }
@@ -6926,14 +6926,14 @@
       update(
         firstLine,
         firstLine.text.slice(0, from.ch) + text[0] + lastLine.text.slice(to.ch),
-        spansFor(0)
+        spansFor(0),
       );
       doc.remove(from.line + 1, nlines);
     } else {
       update(
         firstLine,
         firstLine.text.slice(0, from.ch) + text[0],
-        spansFor(0)
+        spansFor(0),
       );
       update(lastLine, lastText + lastLine.text.slice(to.ch), lastSpans);
       var added$2 = linesFor(1, text.length - 1);
@@ -6985,9 +6985,10 @@
   }
 
   function setDirectionClass(cm) {
-    (cm.doc.direction == "rtl"
-      ? addClass
-      : rmClass)(cm.display.lineDiv, "CodeMirror-rtl");
+    (cm.doc.direction == "rtl" ? addClass : rmClass)(
+      cm.display.lineDiv,
+      "CodeMirror-rtl",
+    );
   }
 
   function directionChanged(cm) {
@@ -7029,10 +7030,10 @@
           doc,
           histChange,
           change.from.line,
-          change.to.line + 1
+          change.to.line + 1,
         );
       },
-      true
+      true,
     );
     return histChange;
   }
@@ -7190,7 +7191,7 @@
             line.markedSpans;
         }
         ++n;
-      }
+      },
     );
   }
 
@@ -7268,7 +7269,7 @@
       var event = events[i];
       if (event.ranges) {
         copy.push(
-          instantiateSel ? Selection.prototype.deepCopy.call(event) : event
+          instantiateSel ? Selection.prototype.deepCopy.call(event) : event,
         );
         continue;
       }
@@ -7332,7 +7333,7 @@
     setSelection(
       doc,
       new Selection([extendRange(doc.sel.primary(), head, other, extend)], 0),
-      options
+      options,
     );
   }
 
@@ -7372,7 +7373,7 @@
         for (var i = 0; i < ranges.length; i++) {
           this$1.ranges[i] = new Range(
             clipPos(doc, ranges[i].anchor),
-            clipPos(doc, ranges[i].head)
+            clipPos(doc, ranges[i].head),
           );
         }
       },
@@ -7407,7 +7408,7 @@
       doc,
       doc.sel,
       doc.cm ? doc.cm.curOp.id : NaN,
-      options
+      options,
     );
   }
 
@@ -7461,14 +7462,14 @@
         range.anchor,
         old && old.anchor,
         bias,
-        mayClear
+        mayClear,
       );
       var newHead = skipAtomic(
         doc,
         range.head,
         old && old.head,
         bias,
-        mayClear
+        mayClear,
       );
       if (out || newAnchor != range.anchor || newHead != range.head) {
         if (!out) {
@@ -7515,7 +7516,7 @@
                 doc,
                 near,
                 -dir,
-                near && near.line == pos.line ? line : null
+                near && near.line == pos.line ? line : null,
               );
             }
             if (
@@ -7677,7 +7678,7 @@
       doc,
       change,
       selAfter,
-      stretchSpansOverChange(doc, change)
+      stretchSpansOverChange(doc, change),
     );
     var rebased = [];
 
@@ -7690,7 +7691,7 @@
         doc,
         change,
         null,
-        stretchSpansOverChange(doc, change)
+        stretchSpansOverChange(doc, change),
       );
     });
   }
@@ -7799,10 +7800,10 @@
       map(doc.sel.ranges, function (range) {
         return new Range(
           Pos(range.anchor.line + distance, range.anchor.ch),
-          Pos(range.head.line + distance, range.head.ch)
+          Pos(range.head.line + distance, range.head.ch),
         );
       }),
-      doc.sel.primIndex
+      doc.sel.primIndex,
     );
     if (doc.cm) {
       regChange(doc.cm, doc.first, doc.first - distance, distance);
@@ -7820,14 +7821,14 @@
         doc,
         change,
         selAfter,
-        spans
+        spans,
       );
     }
 
     if (change.to.line < doc.first) {
       shiftDoc(
         doc,
-        change.text.length - 1 - (change.to.line - change.from.line)
+        change.text.length - 1 - (change.to.line - change.from.line),
       );
       return;
     }
@@ -7907,7 +7908,7 @@
             display.maxLineChanged = true;
             recomputeMaxLength = false;
           }
-        }
+        },
       );
       if (recomputeMaxLength) {
         cm.curOp.updateMaxLine = true;
@@ -8353,7 +8354,7 @@
         widgets.splice(
           Math.min(widgets.length - 1, Math.max(0, widget.insertAt)),
           0,
-          widget
+          widget,
         );
       }
       widget.line = line;
@@ -8373,7 +8374,7 @@
         "lineWidgetAdded",
         cm,
         widget,
-        typeof handle == "number" ? handle : lineNo(handle)
+        typeof handle == "number" ? handle : lineNo(handle),
       );
     }
     return widget;
@@ -8593,7 +8594,7 @@
       marker.widgetNode = eltP(
         "span",
         [marker.replacedWith],
-        "CodeMirror-widget"
+        "CodeMirror-widget",
       );
       if (!options.handleMouseEvents) {
         marker.widgetNode.setAttribute("cm-ignore-events", "true");
@@ -8609,7 +8610,7 @@
           conflictingCollapsedRange(doc, to.line, from, to, marker))
       ) {
         throw new Error(
-          "Inserting collapsed marker partially overlapping an existing one"
+          "Inserting collapsed marker partially overlapping an existing one",
         );
       }
       seeCollapsedSpans();
@@ -8620,7 +8621,7 @@
         doc,
         { from: from, to: to, origin: "markText" },
         doc.sel,
-        NaN
+        NaN,
       );
     }
 
@@ -8644,8 +8645,8 @@
         new MarkedSpan(
           marker,
           curLine == from.line ? from.ch : null,
-          curLine == to.line ? to.ch : null
-        )
+          curLine == to.line ? to.ch : null,
+        ),
       );
       ++curLine;
     });
@@ -8744,7 +8745,7 @@
         options.widgetNode = widget.cloneNode(true);
       }
       markers.push(
-        markText(doc, clipPos(doc, from), clipPos(doc, to), options, type)
+        markText(doc, clipPos(doc, from), clipPos(doc, to), options, type),
       );
       for (var i = 0; i < doc.linked.length; ++i) {
         if (doc.linked[i].isParent) {
@@ -8762,7 +8763,7 @@
       doc.clipPos(Pos(doc.lastLine())),
       function (m) {
         return m.parent;
-      }
+      },
     );
   }
 
@@ -8778,7 +8779,7 @@
           mFrom,
           mTo,
           marker.primary,
-          marker.primary.type
+          marker.primary.type,
         );
         marker.markers.push(subMark);
         subMark.parent = marker;
@@ -8884,7 +8885,7 @@
           origin: "setValue",
           full: true,
         },
-        true
+        true,
       );
       if (this.cm) {
         scrollToCoords(this.cm, 0, 0);
@@ -8965,7 +8966,7 @@
         this,
         clipPos(this, typeof line == "number" ? Pos(line, ch || 0) : line),
         null,
-        options
+        options,
       );
     }),
     setSelection: docMethodOp(function (anchor, head, options) {
@@ -8973,7 +8974,7 @@
         this,
         clipPos(this, anchor),
         clipPos(this, head || anchor),
-        options
+        options,
       );
     }),
     extendSelection: docMethodOp(function (head, other, options) {
@@ -8981,7 +8982,7 @@
         this,
         clipPos(this, head),
         other && clipPos(this, other),
-        options
+        options,
       );
     }),
     extendSelections: docMethodOp(function (heads, options) {
@@ -9001,7 +9002,7 @@
       for (var i = 0; i < ranges.length; i++) {
         out[i] = new Range(
           clipPos(this$1, ranges[i].anchor),
-          clipPos(this$1, ranges[i].head)
+          clipPos(this$1, ranges[i].head),
         );
       }
       if (primary == null) {
@@ -9012,12 +9013,12 @@
     addSelection: docMethodOp(function (anchor, head, options) {
       var ranges = this.sel.ranges.slice(0);
       ranges.push(
-        new Range(clipPos(this, anchor), clipPos(this, head || anchor))
+        new Range(clipPos(this, anchor), clipPos(this, head || anchor)),
       );
       setSelection(
         this,
         normalizeSelection(ranges, ranges.length - 1),
-        options
+        options,
       );
     }),
 
@@ -9230,7 +9231,7 @@
             line[prop] += " " + cls;
           }
           return true;
-        }
+        },
       );
     }),
     removeLineClass: docMethodOp(function (handle, where, cls) {
@@ -9264,7 +9265,7 @@
                 cur.slice(end) || null;
           }
           return true;
-        }
+        },
       );
     }),
 
@@ -9281,7 +9282,7 @@
         clipPos(this, from),
         clipPos(this, to),
         options,
-        (options && options.type) || "range"
+        (options && options.type) || "range",
       );
     },
     setBookmark: function (pos, options) {
@@ -9391,7 +9392,7 @@
         this.modeOption,
         this.first,
         this.lineSep,
-        this.direction
+        this.direction,
       );
       doc.scrollTop = this.scrollTop;
       doc.scrollLeft = this.scrollLeft;
@@ -9421,7 +9422,7 @@
         options.mode || this.modeOption,
         from,
         this.lineSep,
-        this.direction
+        this.direction,
       );
       if (options.sharedHist) {
         copy.history = this.history;
@@ -9462,7 +9463,7 @@
           function (doc) {
             return splitIds.push(doc.id);
           },
-          true
+          true,
         );
         other.history = new History(null);
         other.history.done = copyHistoryArray(this.history.done, splitIds);
@@ -9561,7 +9562,7 @@
             makeChange(cm.doc, change);
             setSelectionReplaceHistory(
               cm.doc,
-              simpleSelection(pos, changeEnd(change))
+              simpleSelection(pos, changeEnd(change)),
             );
           }
         });
@@ -9596,7 +9597,7 @@
                 "",
                 selected[i$1].anchor,
                 selected[i$1].head,
-                "drag"
+                "drag",
               );
             }
           }
@@ -9649,11 +9650,11 @@
       cm.display.dragCursor = elt(
         "div",
         null,
-        "CodeMirror-cursors CodeMirror-dragcursors"
+        "CodeMirror-cursors CodeMirror-dragcursors",
       );
       cm.display.lineSpace.insertBefore(
         cm.display.dragCursor,
-        cm.display.cursorDiv
+        cm.display.cursorDiv,
       );
     }
     removeChildrenAndAdd(cm.display.dragCursor, frag);
@@ -10114,7 +10115,7 @@
               return measureCharPrepared(cm, prep, ch).top == targetTop;
             },
             dir < 0 == (part.level == 1) ? part.from : part.to - 1,
-            ch
+            ch,
           );
           if (sticky == "before") {
             ch = moveCharLogically(lineObj, ch, 1);
@@ -10128,7 +10129,7 @@
     return new Pos(
       lineNo,
       dir < 0 ? lineObj.text.length : 0,
-      dir < 0 ? "before" : "after"
+      dir < 0 ? "before" : "after",
     );
   }
 
@@ -10168,7 +10169,7 @@
       return wrappedLineExtentChar(cm, line, prep, ch);
     };
     var wrappedLineExtent = getWrappedLineExtent(
-      start.sticky == "before" ? mv(start, -1) : start.ch
+      start.sticky == "before" ? mv(start, -1) : start.ch,
     );
 
     if (cm.doc.direction == "rtl" || part.level == 1) {
@@ -10225,7 +10226,7 @@
       res = searchInVisualLine(
         dir > 0 ? 0 : bidi.length - 1,
         dir,
-        getWrappedLineExtent(nextCh)
+        getWrappedLineExtent(nextCh),
       );
       if (res) {
         return res;
@@ -10244,7 +10245,7 @@
       return cm.setSelection(
         cm.getCursor("anchor"),
         cm.getCursor("head"),
-        sel_dontScroll
+        sel_dontScroll,
       );
     },
     killLine: function (cm) {
@@ -10289,7 +10290,7 @@
         var top = cm.charCoords(range.head, "div").top + 5;
         var rightPos = cm.coordsChar(
           { left: cm.display.lineDiv.offsetWidth + 100, top: top },
-          "div"
+          "div",
         );
         return { from: range.from(), to: rightPos };
       });
@@ -10317,7 +10318,7 @@
         function (range) {
           return lineStart(cm, range.head.line);
         },
-        { origin: "+move", bias: 1 }
+        { origin: "+move", bias: 1 },
       );
     },
     goLineStartSmart: function (cm) {
@@ -10325,7 +10326,7 @@
         function (range) {
           return lineStartSmart(cm, range.head);
         },
-        { origin: "+move", bias: 1 }
+        { origin: "+move", bias: 1 },
       );
     },
     goLineEnd: function (cm) {
@@ -10333,7 +10334,7 @@
         function (range) {
           return lineEnd(cm, range.head.line);
         },
-        { origin: "+move", bias: -1 }
+        { origin: "+move", bias: -1 },
       );
     },
     goLineRight: function (cm) {
@@ -10341,7 +10342,7 @@
         var top = cm.cursorCoords(range.head, "div").top + 5;
         return cm.coordsChar(
           { left: cm.display.lineDiv.offsetWidth + 100, top: top },
-          "div"
+          "div",
         );
       }, sel_move);
     },
@@ -10472,7 +10473,7 @@
                 line.charAt(cur.ch - 1) + line.charAt(cur.ch - 2),
                 Pos(cur.line, cur.ch - 2),
                 cur,
-                "+transpose"
+                "+transpose",
               );
             } else if (cur.line > cm.doc.first) {
               var prev = getLine(cm.doc, cur.line - 1).text;
@@ -10484,7 +10485,7 @@
                     prev.charAt(prev.length - 1),
                   Pos(cur.line - 1, prev.length - 1),
                   cur,
-                  "+transpose"
+                  "+transpose",
                 );
               }
             }
@@ -10502,7 +10503,7 @@
             cm.doc.lineSeparator(),
             sels[i].anchor,
             sels[i].head,
-            "+input"
+            "+input",
           );
         }
         sels = cm.listSelections();
@@ -10891,7 +10892,7 @@
           cm.state.suppressEdits = false;
         }
         return done;
-      }
+      },
     );
   }
 
@@ -11057,7 +11058,7 @@
           ourRange,
           range.anchor,
           range.head,
-          behavior.extend
+          behavior.extend,
         );
       } else {
         ourRange = range;
@@ -11073,7 +11074,7 @@
       setSelection(
         doc,
         normalizeSelection(ranges.concat([ourRange]), ourIndex),
-        { scroll: false, origin: "*mouse" }
+        { scroll: false, origin: "*mouse" },
       );
     } else if (
       ranges.length > 1 &&
@@ -11085,9 +11086,9 @@
         doc,
         normalizeSelection(
           ranges.slice(0, ourIndex).concat(ranges.slice(ourIndex + 1)),
-          0
+          0,
         ),
-        { scroll: false, origin: "*mouse" }
+        { scroll: false, origin: "*mouse" },
       );
       startSel = doc.sel;
     } else {
@@ -11107,7 +11108,7 @@
         var startCol = countColumn(
           getLine(doc, start.line).text,
           start.ch,
-          tabSize
+          tabSize,
         );
         var posCol = countColumn(getLine(doc, pos.line).text, pos.ch, tabSize);
         var left = Math.min(startCol, posCol),
@@ -11126,8 +11127,8 @@
             ranges.push(
               new Range(
                 Pos(line, leftPos),
-                Pos(line, findColumn(text, right, tabSize))
-              )
+                Pos(line, findColumn(text, right, tabSize)),
+              ),
             );
           }
         }
@@ -11138,9 +11139,9 @@
           doc,
           normalizeSelection(
             startSel.ranges.slice(0, ourIndex).concat(ranges),
-            ourIndex
+            ourIndex,
           ),
-          { origin: "*mouse", scroll: false }
+          { origin: "*mouse", scroll: false },
         );
         cm.scrollIntoView(pos);
       } else {
@@ -11158,7 +11159,7 @@
         var ranges$1 = startSel.ranges.slice(0);
         ranges$1[ourIndex] = bidiSimplify(
           cm,
-          new Range(clipPos(doc, anchor), head)
+          new Range(clipPos(doc, anchor), head),
         );
         setSelection(doc, normalizeSelection(ranges$1, ourIndex), sel_mouse);
       }
@@ -11188,7 +11189,7 @@
                 extend(e);
               }
             }),
-            150
+            150,
           );
         }
       } else {
@@ -11207,7 +11208,7 @@
               display.scroller.scrollTop += outside;
               extend(e);
             }),
-            50
+            50,
           );
         }
       }
@@ -11398,7 +11399,7 @@
       function (cm, val) {
         return cm.setValue(val);
       },
-      true
+      true,
     );
     option(
       "mode",
@@ -11407,7 +11408,7 @@
         cm.doc.modeOption = val;
         loadMode(cm);
       },
-      true
+      true,
     );
 
     option("indentUnit", 2, loadMode, true);
@@ -11421,7 +11422,7 @@
         clearCaches(cm);
         regChange(cm);
       },
-      true
+      true,
     );
 
     option("lineSeparator", null, function (cm, val) {
@@ -11447,7 +11448,7 @@
           cm.doc,
           val,
           newBreaks[i],
-          Pos(newBreaks[i].line, newBreaks[i].ch + val.length)
+          Pos(newBreaks[i].line, newBreaks[i].ch + val.length),
         );
       }
     });
@@ -11457,12 +11458,12 @@
       function (cm, val, old) {
         cm.state.specialChars = new RegExp(
           val.source + (val.test("\t") ? "" : "|\t"),
-          "g"
+          "g",
         );
         if (old != Init) {
           cm.refresh();
         }
-      }
+      },
     );
     option(
       "specialCharPlaceholder",
@@ -11470,7 +11471,7 @@
       function (cm) {
         return cm.refresh();
       },
-      true
+      true,
     );
     option("electricChars", true);
     option(
@@ -11478,10 +11479,10 @@
       mobile ? "contenteditable" : "textarea",
       function () {
         throw new Error(
-          "inputStyle can not (yet) be changed in a running editor"
+          "inputStyle can not (yet) be changed in a running editor",
         ); // FIXME
       },
-      true
+      true,
     );
     option(
       "spellcheck",
@@ -11489,7 +11490,7 @@
       function (cm, val) {
         return (cm.getInputField().spellcheck = val);
       },
-      true
+      true,
     );
     option("rtlMoveVisually", !windows);
     option("wholeLineUpdateBefore", true);
@@ -11501,7 +11502,7 @@
         themeChanged(cm);
         guttersChanged(cm);
       },
-      true
+      true,
     );
     option("keyMap", "default", function (cm, val, old) {
       var next = getKeyMap(val);
@@ -11524,7 +11525,7 @@
         setGuttersForLineNumbers(cm.options);
         guttersChanged(cm);
       },
-      true
+      true,
     );
     option(
       "fixedGutter",
@@ -11535,7 +11536,7 @@
           : "0";
         cm.refresh();
       },
-      true
+      true,
     );
     option(
       "coverGutterNextToScrollbar",
@@ -11543,7 +11544,7 @@
       function (cm) {
         return updateScrollbars(cm);
       },
-      true
+      true,
     );
     option(
       "scrollbarStyle",
@@ -11554,7 +11555,7 @@
         cm.display.scrollbars.setScrollTop(cm.doc.scrollTop);
         cm.display.scrollbars.setScrollLeft(cm.doc.scrollLeft);
       },
-      true
+      true,
     );
     option(
       "lineNumbers",
@@ -11563,7 +11564,7 @@
         setGuttersForLineNumbers(cm.options);
         guttersChanged(cm);
       },
-      true
+      true,
     );
     option("firstLineNumber", 1, guttersChanged, true);
     option(
@@ -11572,7 +11573,7 @@
         return integer;
       },
       guttersChanged,
-      true
+      true,
     );
     option("showCursorWhenSelecting", false, updateSelection, true);
 
@@ -11595,7 +11596,7 @@
           cm.display.input.reset();
         }
       },
-      true
+      true,
     );
     option("dragDrop", true, dragDropChanged);
     option("allowDropFileTypes", null);
@@ -11619,7 +11620,7 @@
       function (cm) {
         return cm.refresh();
       },
-      true
+      true,
     );
     option("maxHighlightLength", 10000, resetModeState, true);
     option("moveInputWithCursor", true, function (cm, val) {
@@ -11638,7 +11639,7 @@
       function (cm, val) {
         return cm.doc.setDirection(val);
       },
-      true
+      true,
     );
   }
 
@@ -11700,7 +11701,7 @@
         options.mode,
         null,
         options.lineSeparator,
-        options.direction
+        options.direction,
       );
     }
     this.doc = doc;
@@ -11806,7 +11807,7 @@
           e_preventDefault(e);
           var word = cm.findWordAt(pos);
           extendSelection(cm.doc, word.anchor, word.head);
-        })
+        }),
       );
     } else {
       on(d.scroller, "dblclick", function (e) {
@@ -11895,7 +11896,7 @@
         else {
           range = new Range(
             Pos(pos.line, 0),
-            clipPos(cm.doc, Pos(pos.line + 1, 0))
+            clipPos(cm.doc, Pos(pos.line + 1, 0)),
           );
         }
         cm.setSelection(range.anchor, range.head);
@@ -12007,7 +12008,7 @@
       indentation = doc.mode.indent(
         state,
         line.text.slice(curSpaceString.length),
-        line.text
+        line.text,
       );
       if (indentation == Pass || indentation > 150) {
         if (!aggressive) {
@@ -12049,7 +12050,7 @@
         indentString,
         Pos(n, 0),
         Pos(n, curSpaceString.length),
-        "+input"
+        "+input",
       );
       line.stateAfter = null;
       return true;
@@ -12121,8 +12122,8 @@
             to.line,
             Math.min(
               getLine(doc, to.line).text.length,
-              to.ch + lst(textLines).length
-            )
+              to.ch + lst(textLines).length,
+            ),
           );
         } else if (
           lastCopied &&
@@ -12193,7 +12194,7 @@
       } else if (mode.electricInput) {
         if (
           mode.electricInput.test(
-            getLine(cm.doc, range.head.line).text.slice(0, range.head.ch)
+            getLine(cm.doc, range.head.line).text.slice(0, range.head.ch),
           )
         ) {
           indented = indentLine(cm, range.head.line, "smart");
@@ -12228,13 +12229,13 @@
       "textarea",
       null,
       null,
-      "position: absolute; bottom: -1em; padding: 0; width: 1px; height: 1em; outline: none"
+      "position: absolute; bottom: -1em; padding: 0; width: 1px; height: 1em; outline: none",
     );
     var div = elt(
       "div",
       [te],
       null,
-      "overflow: hidden; position: relative; width: 3px; height: 0px;"
+      "overflow: hidden; position: relative; width: 3px; height: 0px;",
     );
     // The textarea is kept positioned near the cursor to prevent the
     // fact that it'll be scrolled into view on input from scrolling
@@ -12321,7 +12322,7 @@
           },
           function (overlay) {
             return overlay.priority;
-          }
+          },
         );
         this.state.modeGen++;
         regChange(this);
@@ -12378,7 +12379,7 @@
                 this$1.doc,
                 i,
                 new Range(from, newRanges[i].to()),
-                sel_dontScroll
+                sel_dontScroll,
               );
             }
           } else if (range.head.line > end) {
@@ -12505,7 +12506,7 @@
         height = fromCoordSystem(
           this,
           { top: height, left: 0 },
-          mode || "page"
+          mode || "page",
         ).top;
         return lineAtHeight(this.doc, height + this.display.viewOffset);
       },
@@ -12530,7 +12531,7 @@
             lineObj,
             { top: 0, left: 0 },
             mode || "page",
-            includeWidgets || end
+            includeWidgets || end,
           ).top + (end ? this.doc.height - heightAtLine(lineObj) : 0)
         );
       },
@@ -12561,7 +12562,7 @@
           var vspace = Math.max(display.wrapper.clientHeight, this.doc.height),
             hspace = Math.max(
               display.sizer.clientWidth,
-              display.lineSpace.clientWidth
+              display.lineSpace.clientWidth,
             );
           // Default to positioning above (if specified and possible); otherwise default to positioning below
           if (
@@ -12642,7 +12643,7 @@
               range.head,
               dir,
               unit,
-              this$1.options.rtlMoveVisually
+              this$1.options.rtlMoveVisually,
             );
           } else {
             return dir < 0 ? range.from() : range.to();
@@ -12710,7 +12711,7 @@
           if (unit == "page" && range == doc.sel.primary()) {
             addToScrollTop(
               this$1,
-              charCoords(this$1, pos, "div").top - headPos.top
+              charCoords(this$1, pos, "div").top - headPos.top,
             );
           }
           return pos;
@@ -13010,7 +13011,7 @@
     if (unit == "page") {
       var pageSize = Math.min(
         cm.display.wrapper.clientHeight,
-        window.innerHeight || document.documentElement.clientHeight
+        window.innerHeight || document.documentElement.clientHeight,
       );
       var moveAmount = Math.max(pageSize - 0.5 * textHeight(cm.display), 3);
       y = (dir > 0 ? pos.bottom : pos.top) + dir * moveAmount;
@@ -13065,7 +13066,7 @@
           operation(cm, function () {
             return this$1.updateFromDOM();
           }),
-          20
+          20,
         );
       }
     });
@@ -13133,7 +13134,7 @@
         te = kludge.firstChild;
       cm.display.lineSpace.insertBefore(
         kludge,
-        cm.display.lineSpace.firstChild
+        cm.display.lineSpace.firstChild,
       );
       te.value = lastCopied.text.join("\n");
       var hadFocus = document.activeElement;
@@ -13426,12 +13427,12 @@
       return false;
     }
     var newText = cm.doc.splitLines(
-      domTextBetween(cm, fromNode, toNode, fromLine, toLine)
+      domTextBetween(cm, fromNode, toNode, fromLine, toLine),
     );
     var oldText = getBetween(
       cm.doc,
       Pos(fromLine, 0),
-      Pos(toLine, getLine(cm.doc, toLine).text.length)
+      Pos(toLine, getLine(cm.doc, toLine).text.length),
     );
     while (newText.length > 1 && oldText.length > 1) {
       if (lst(newText) == lst(oldText)) {
@@ -13462,7 +13463,7 @@
       oldBot = lst(oldText);
     var maxCutEnd = Math.min(
       newBot.length - (newText.length == 1 ? cutFront : 0),
-      oldBot.length - (oldText.length == 1 ? cutFront : 0)
+      oldBot.length - (oldText.length == 1 ? cutFront : 0),
     );
     while (
       cutEnd < maxCutEnd &&
@@ -13555,7 +13556,7 @@
       operation(this.cm, applyTextInput)(
         this.cm,
         String.fromCharCode(e.charCode == null ? e.keyCode : e.charCode),
-        0
+        0,
       );
     }
   };
@@ -13642,7 +13643,7 @@
           var found = cm.findMarks(
             Pos(fromLine, 0),
             Pos(toLine + 1, 0),
-            recognizeMarker(+markerID)
+            recognizeMarker(+markerID),
           );
           if (found.length && (range = found[0].find(0))) {
             addText(getBetween(cm.doc, range.from, range.to).join(lineSep));
@@ -13930,15 +13931,15 @@
         0,
         Math.min(
           display.wrapper.clientHeight - 10,
-          headPos.top + lineOff.top - wrapOff.top
-        )
+          headPos.top + lineOff.top - wrapOff.top,
+        ),
       );
       result.teLeft = Math.max(
         0,
         Math.min(
           display.wrapper.clientWidth - 10,
-          headPos.left + lineOff.left - wrapOff.left
-        )
+          headPos.left + lineOff.left - wrapOff.left,
+        ),
       );
     }
 
@@ -14114,7 +14115,7 @@
         text.slice(same),
         prevInput.length - same,
         null,
-        this$1.composing ? "*compose" : null
+        this$1.composing ? "*compose" : null,
       );
 
       // Don't leave long text in the textarea, since it makes further polling slow
@@ -14129,7 +14130,7 @@
         this$1.composing.range = cm.markText(
           this$1.composing.start,
           cm.getCursor("to"),
-          { className: "CodeMirror-composing" }
+          { className: "CodeMirror-composing" },
         );
       }
     });
@@ -14219,7 +14220,7 @@
       te.style.cssText = oldCSS;
       if (ie && ie_version < 9) {
         display.scrollbars.setScrollTop(
-          (display.scroller.scrollTop = scrollPos)
+          (display.scroller.scrollTop = scrollPos),
         );
       }
 
